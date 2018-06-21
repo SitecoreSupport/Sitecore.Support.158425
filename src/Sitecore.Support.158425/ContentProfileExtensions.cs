@@ -8,22 +8,11 @@
   using Sitecore.Analytics.Data;
   public static class ContentProfileExtensions
   {
-    public static Item GetProfileCardItem(this ContentProfile contentProfile, string alias)
+    public static Item GetProfileItemFixed(this ContentProfile contentProfile)
     {
       Condition.Requires<ContentProfile>(contentProfile, "contentProfile").IsNotNull<ContentProfile>();
-      Condition.Requires<string>(alias, "alias").IsNotNull<string>();
-      IProfileCardDefinition preset = contentProfile.GetPreset(alias);
-      if (preset != null)
-      {
-        return DefinitionDatabase.Database.GetItem(preset.Id.ToID());
-      }
-      return null;
-    }
-
-    public static Item GetProfileItem(this ContentProfile contentProfile)
-    {
-      Condition.Requires<ContentProfile>(contentProfile, "contentProfile").IsNotNull<ContentProfile>();
-      return DefinitionDatabase.Database.GetItem(contentProfile.Definition.Id.ToID());
+      //The fix: Get profile item from Context.Site.ContentDatabase instead of Context.ContentDatabase
+      return Context.Site.ContentDatabase.GetItem(contentProfile.Definition.Id.ToID());
     }
   }
 }

@@ -1,4 +1,4 @@
-﻿namespace Sitecore.ContentTesting.Speak.Ribbon.Panels
+﻿namespace Sitecore.Support.ContentTesting.Speak.Ribbon.Panels
 {
   using Sitecore.Collections;
   using Sitecore.ExperienceEditor.Speak.Ribbon;
@@ -12,9 +12,10 @@
 
     static DefaultProfileCardsPanel()
     {
-      new SafeDictionary<Type, object>().Add(typeof(RibbonComponentControlBase), new Sitecore.ContentTesting.Speak.Ribbon.Panels.ProfileCardsPanel.ProfileCardsPanel());
-      new SafeDictionary<Type, object>().Add(typeof(RibbonPanel), new ProfileCards());
       ProfileCardsPanels = new SafeDictionary<Type, object>();
+      //The fix: use ProfileCardsPanel from the patch
+      ProfileCardsPanels.Add(typeof(RibbonComponentControlBase), new Sitecore.Support.ContentTesting.Speak.Ribbon.Panels.ProfileCardsPanel.ProfileCardsPanel());
+      ProfileCardsPanels.Add(typeof(RibbonPanel), new ProfileCards());
     }
 
     protected override SafeDictionary<Type, object> Panels =>

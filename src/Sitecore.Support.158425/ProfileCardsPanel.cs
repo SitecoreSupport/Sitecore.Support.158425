@@ -1,4 +1,4 @@
-﻿namespace Sitecore.ContentTesting.Speak.Ribbon.Panels.ProfileCardsPanel
+﻿namespace Sitecore.Support.ContentTesting.Speak.Ribbon.Panels.ProfileCardsPanel
 {
   using Sitecore.Analytics.Data;
   using Sitecore.ContentTesting.Diagnostics;
@@ -15,6 +15,7 @@
   using System.Diagnostics.CodeAnalysis;
   using System.Linq;
   using System.Web.UI;
+  using Sitecore.Support.Analytics.Data;
 
   public class ProfileCardsPanel : RibbonComponentControlBase
   {
@@ -64,7 +65,7 @@
         {
           if (profile != null)
           {
-            Item profileItem = profile.GetProfileItem();
+            Item profileItem = profile.GetProfileItemFixed();
             if (profileItem != null)
             {
               if ((profile.Presets == null) || (profile.Presets.Count == 0))
